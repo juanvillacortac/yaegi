@@ -7,7 +7,7 @@ package slices
 
 import (
 	"cmp"
-	// TODO(marc) fix this.  "unsafe"
+	"unsafe"
 )
 
 // Equal reports whether two slices are equal: the same length and all
@@ -465,8 +465,6 @@ func swap[E any](x, y []E) {
 
 // overlaps reports whether the memory ranges a[0:len(a)] and b[0:len(b)] overlap.
 func overlaps[E any](a, b []E) bool {
-	return false
-	/* TODO(marc): restore the following
 	if len(a) == 0 || len(b) == 0 {
 		return false
 	}
@@ -478,7 +476,6 @@ func overlaps[E any](a, b []E) bool {
 	// Also see crypto/internal/alias/alias.go:AnyOverlap
 	return uintptr(unsafe.Pointer(&a[0])) <= uintptr(unsafe.Pointer(&b[len(b)-1]))+(elemSize-1) &&
 		uintptr(unsafe.Pointer(&b[0])) <= uintptr(unsafe.Pointer(&a[len(a)-1]))+(elemSize-1)
-		*/
 }
 
 // startIdx returns the index in haystack where the needle starts.

@@ -25,7 +25,7 @@ tests:
 
 # https://github.com/goreleaser/godownloader
 install.sh: .goreleaser.yml
-	godownloader --repo=traefik/yaegi -o install.sh .goreleaser.yml
+	godownloader --repo=juanvillacortac/yaegi -o install.sh .goreleaser.yml
 
 generic_list = cmp/cmp.go slices/slices.go slices/sort.go slices/zsortanyfunc.go maps/maps.go \
 			   sync/oncefunc.go sync/atomic/type.go
@@ -38,4 +38,6 @@ get_generic_src:
 		cat "$$GOROOT/src/$$f" > "$$nf"; \
 	done
 
-.PHONY: check gen_all_syscall internal/cmd/extract/extract get_generic_src install
+gen_symbols: gen_all_syscall internal/cmd/extract/extract get_generic_src
+
+.PHONY: check gen_symbols install

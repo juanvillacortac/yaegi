@@ -24,7 +24,7 @@ linters-settings:
           - $all
         allow:
           - $gostd
-          - github.com/traefik/yaegi
+          - github.com/juanvillaortac/yaegi
   tagalign:
     align: false
     order:
@@ -145,19 +145,19 @@ issues:
   max-issues-per-linter: 0
   max-same-issues: 0
   exclude:
-    - 'fmt.Sprintf can be replaced with string'
+    - "fmt.Sprintf can be replaced with string"
   exclude-rules:
     - path: .+_test\.go
       linters:
         - goconst
     - path: .+_test\.go
-      text: 'var-declaration:'
+      text: "var-declaration:"
     - path: interp/interp.go
-      text: '`in` can be `io.Reader`'
+      text: "`in` can be `io.Reader`"
     - path: interp/interp.go
-      text: '`out` can be `io.Writer`'
+      text: "`out` can be `io.Writer`"
     - path: interp/interp.go
-      text: '`Panic` should conform to the `XxxError` format'
+      text: "`Panic` should conform to the `XxxError` format"
     - path: interp/interp_eval_test.go
       linters:
         - thelper

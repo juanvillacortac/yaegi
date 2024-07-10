@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/traefik/yaegi/interp"
+	"github.com/juanvillacortac/yaegi/interp"
 )
 
 func main() {

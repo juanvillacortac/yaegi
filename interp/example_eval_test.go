@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/traefik/yaegi/interp"
+	"github.com/juanvillacortac/yaegi/interp"
 )
 
 // Generic example.

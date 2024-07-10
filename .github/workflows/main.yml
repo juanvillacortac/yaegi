@@ -11,7 +11,6 @@ env:
   GOLANGCI_LINT_VERSION: v1.56.2
 
 jobs:
-
   linting:
     name: Linting
     runs-on: ubuntu-latest
@@ -45,7 +44,7 @@ jobs:
     needs: linting
     strategy:
       matrix:
-        go-version: [ oldstable, stable ]
+        go-version: [oldstable, stable]
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -73,16 +72,16 @@ jobs:
     needs: linting
     defaults:
       run:
-        working-directory: ${{ github.workspace }}/go/src/github.com/traefik/yaegi
+        working-directory: ${{ github.workspace }}/go/src/github.com/juanvillacortac/yaegi
     strategy:
       matrix:
-        go-version: [ oldstable, stable ]
+        go-version: [oldstable, stable]
 
     steps:
       - name: Check out code
         uses: actions/checkout@v4
         with:
-          path: go/src/github.com/traefik/yaegi
+          path: go/src/github.com/juanvillacortac/yaegi
           fetch-depth: 0
 
       - name: Set up Go ${{ matrix.go-version }}
