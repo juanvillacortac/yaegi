@@ -2,4 +2,4 @@
 
 package stdlib
 
-//go:generate ../internal/cmd/extract/extract crypto/ecdhgo:generate ../internal/cmd/extract/extract maps
+//go:generate ../internal/cmd/extract/extract crypto/ecdh

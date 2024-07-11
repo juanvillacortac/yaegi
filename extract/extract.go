@@ -189,7 +189,7 @@ func (e *Extractor) genContent(importPath string, p *types.Package) ([]byte, err
 		}
 
 		pname := p.Name() + "." + name
-		if rname := p.Name() + name; restricted[rname] {
+		if rname := p.Name() + name; restricted[rname] && isStandardPackage(importPath) {
 			// Restricted symbol, locally provided by stdlib wrapper.
 			pname = rname
 		}
@@ -538,3 +538,21 @@ func genBuildTags() (string, error) {
 }
 
 func isInStdlib(path string) bool { return !strings.Contains(path, ".") }
+
+var standardPackages = make(map[string]struct{})
+
+func init() {
+	pkgs, err := packages.Load(nil, "std")
+	if err != nil {
+		panic(err)
+	}
+
+	for _, p := range pkgs {
+		standardPackages[p.PkgPath] = struct{}{}
+	}
+}
+
+func isStandardPackage(pkg string) bool {
+	_, ok := standardPackages[pkg]
+	return ok
+}
