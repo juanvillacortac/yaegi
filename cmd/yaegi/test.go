@@ -122,36 +122,20 @@ func test(arg []string) (err error) {
 		Env:          os.Environ(),
 		Unrestricted: useUnrestricted,
 	})
+	if err := i.Use(syscall.Symbols); err != nil {
+		return err
+	}
+	if err := i.Use(unsafe.Symbols); err != nil {
+		return err
+	}
 	if err := i.Use(stdlib.Symbols); err != nil {
+		return err
+	}
+	if err := i.Use(unrestricted.Symbols); err != nil {
 		return err
 	}
 	if err := i.Use(interp.Symbols); err != nil {
 		return err
-	}
-	if useSyscall {
-		if err := i.Use(syscall.Symbols); err != nil {
-			return err
-		}
-		// Using a environment var allows a nested interpreter to import the syscall package.
-		if err := os.Setenv("YAEGI_SYSCALL", "1"); err != nil {
-			return err
-		}
-	}
-	if useUnrestricted {
-		if err := i.Use(unrestricted.Symbols); err != nil {
-			return err
-		}
-		if err := os.Setenv("YAEGI_UNRESTRICTED", "1"); err != nil {
-			return err
-		}
-	}
-	if useUnsafe {
-		if err := i.Use(unsafe.Symbols); err != nil {
-			return err
-		}
-		if err := os.Setenv("YAEGI_UNSAFE", "1"); err != nil {
-			return err
-		}
 	}
 	if err = i.EvalTest(path); err != nil {
 		return err

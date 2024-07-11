@@ -474,7 +474,6 @@ func (interp *Interpreter) cfg(root *node, sc *scope, importPath, pkgName string
 		case funcDecl:
 			// Do not allow function declarations without body.
 			if len(n.child) < 4 {
-				err = n.cfgErrorf("missing function body")
 				return false
 			}
 			n.val = n
@@ -687,6 +686,14 @@ func (interp *Interpreter) cfg(root *node, sc *scope, importPath, pkgName string
 			var sbase int
 			if n.nright > 0 {
 				sbase = len(n.child) - n.nright
+			}
+
+			// If len(RHS) > 1, each node must be single-valued, and the nth expression
+			// on the right is assigned to the nth operand on the left, so the number of
+			// nodes on the left and right sides must be equal
+			if n.nright > 1 && n.nright != n.nleft {
+				err = n.cfgErrorf("cannot assign %d values to %d variables", n.nright, n.nleft)
+				return
 			}
 
 			wireChild(n)

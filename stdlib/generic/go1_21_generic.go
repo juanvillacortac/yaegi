@@ -23,11 +23,13 @@ var syncAtomicSource string
 */
 
 // Sources contains the list of generic packages source strings.
-var Sources = [...]string{
-	cmpSource,
-	mapsSource,
-	slicesSource,
-	// FIXME(marc): support the following.
-	// syncAtomicSource,
-	// syncSource,
+func init() {
+	Sources = []string{
+		cmpSource,
+		mapsSource,
+		slicesSource,
+		// FIXME(marc): support the following.
+		// syncAtomicSource,
+		// syncSource,
+	}
 }
